@@ -30,7 +30,7 @@ $setting['DoNotDisturb']['refresh'] = 1800; // Refresh all 30 minutes
 $setting['DoNotDisturb']['vibrate'] = 0; // Vibrate off
 $setting['DoNotDisturb']['blink'] = 0; // Blink off
 
-# Settings content
+# Settings contents to display
 
 // For each button, you can set content and refresh/blink/vibrate options
 
