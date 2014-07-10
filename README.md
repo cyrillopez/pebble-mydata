@@ -17,7 +17,7 @@ Source : https://github.com/cyrillopez/pebble-mydata/
 
 Instructions :
 
-Start by editing setting.php and set your options
+Start by editing settings.php and set your options
 
 You can set differents contents and options for each button of Pebble and type of press (short or long)
 
