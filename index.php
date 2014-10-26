@@ -5,11 +5,16 @@
 
 # Please keep Copyrights
 
-# Explains & source from App Pebble My Data v2.2.0 by Ivan Strokanev 
+# Explains & source from App Pebble My Data v2.3.3 by Ivan Strokanev 
 # Source : https://github.com/bahbka/pebble-my-data
-# Script PHP v1.03 by Cyril Lopez (Twitter : @CyrilLopez)
+# Script PHP v1.06 by Cyril Lopez (Twitter : @CyrilLopez)
 # Source : https://github.com/cyrillopez/pebble-mydata/
-# + Security Token & Auth + Do Not Disturb Mode + Settings from url
+# V1.07 Fix Function read_content_from_url (adding type option in setting file)
+# V1.06 Fix Do Not Disturb Mode
+# V1.05 Add Shake pebble action 
+# V1.04 Add Security Token & Auth 
+# V1.03 Add Do Not Disturb Mode 
+# V1.02 Add Settings from url
 
 
 # Include settings (Please use this file to setup script)
@@ -54,7 +59,17 @@ if ($error == true) {
 	if ($setting['error']['refresh'] != '') $refresh = $setting['error']['refresh'];
 	if ($setting['error']['blink'] != '') $blink = $setting['error']['blink'];
 	if ($setting['error']['vibrate'] != '') $vibrate = $setting['error']['vibrate'];
-	$message = $setting['error']['content'];
+	if ($setting['error']['type'] == 'text') $message = $setting['error']['content'];
+	else if ($setting['error']['type'] == 'url') $message = read_content_from_url($setting['error']['content']); 
+}
+
+# When shake pebble
+else if ($shake == 1) {  
+	if ($setting['shake']['refresh'] != '') $refresh = $setting['shake']['refresh'];
+	if ($setting['shake']['blink'] != '') $blink = $setting['shake']['blink'];
+	if ($setting['shake']['vibrate'] != '') $vibrate = $setting['shake']['vibrate'];
+	if ($setting['shake']['type'] == 'text') $message = $setting['shake']['content'];
+	else if ($setting['shake']['type'] == 'url') $message = read_content_from_url($setting['shake']['content']); 
 }
 
 # When button select short press
@@ -62,7 +77,8 @@ else if ($select == 1) {
 	if ($setting['select_short']['refresh'] != '') $refresh = $setting['select_short']['refresh'];
 	if ($setting['select_short']['blink'] != '') $blink = $setting['select_short']['blink'];
 	if ($setting['select_short']['vibrate'] != '') $vibrate = $setting['select_short']['vibrate'];
-	$message = $setting['select_short']['content']; 
+	if ($setting['select_short']['type'] == 'text') $message = $setting['select_short']['content'];
+	else if ($setting['select_short']['type'] == 'url') $message = read_content_from_url($setting['select_short']['content']); 
 }
 
 # When button select long press
@@ -71,7 +87,8 @@ else if ($select == 2)
 	if ($setting['select_long']['refresh'] != '') $refresh = $setting['select_long']['refresh'];
 	if ($setting['select_long']['blink'] != '') $blink = $setting['select_long']['blink'];
 	if ($setting['select_long']['vibrate'] != '') $vibrate = $setting['select_long']['vibrate'];
-	$message = $setting['select_long']['content'];
+	if ($setting['select_long']['type'] == 'text') $message = $setting['select_long']['content'];
+	else if ($setting['select_long']['type'] == 'url') $message = read_content_from_url($setting['select_long']['content']); 
 }
 
 # When button up short press
@@ -80,7 +97,8 @@ else if ($up == 1)
 	if ($setting['up_short']['refresh'] != '') $refresh = $setting['up_short']['refresh'];
 	if ($setting['up_short']['blink'] != '') $blink = $setting['up_short']['blink'];
 	if ($setting['up_short']['vibrate'] != '') $vibrate = $setting['up_short']['vibrate'];
-	$message = $setting['up_short']['content'];
+	if ($setting['up_short']['type'] == 'text') $message = $setting['up_short']['content'];
+	else if ($setting['up_short']['type'] == 'url') $message = read_content_from_url($setting['up_short']['content']); 
 }
 
 # When button up long press
@@ -89,7 +107,8 @@ else if ($up == 2)
 	if ($setting['up_long']['refresh'] != '') $refresh = $setting['up_long']['refresh'];
 	if ($setting['up_long']['blink'] != '') $blink = $setting['up_long']['blink'];
 	if ($setting['up_long']['vibrate'] != '') $vibrate = $setting['up_long']['vibrate'];
-	$message = $setting['up_long']['content'];
+	if ($setting['up_long']['type'] == 'text') $message = $setting['up_long']['content'];
+	else if ($setting['up_long']['type'] == 'url') $message = read_content_from_url($setting['up_long']['content']); 
 }
 
 # When button down short press
@@ -98,7 +117,8 @@ else if ($down == 1)
 	if ($setting['down_short']['refresh'] != '') $refresh = $setting['down_short']['refresh'];
 	if ($setting['down_short']['blink'] != '') $blink = $setting['down_short']['blink'];
 	if ($setting['down_short']['vibrate'] != '') $vibrate = $setting['down_short']['vibrate'];
-	$message = $setting['down_short']['content'];  
+	if ($setting['down_short']['type'] == 'text') $message = $setting['down_short']['content'];
+	else if ($setting['down_short']['type'] == 'url') $message = read_content_from_url($setting['down_short']['content']); 
 }
 
 # When button down long press
@@ -107,12 +127,14 @@ else if ($down == 2)
 	if ($setting['down_long']['refresh'] != '') $refresh = $setting['down_long']['refresh'];
 	if ($setting['down_long']['blink'] != '') $blink = $setting['down_long']['blink'];
 	if ($setting['down_long']['vibrate'] != '') $vibrate = $setting['down_long']['vibrate'];
-	$message = $setting['down_long']['content']; 
+	if ($setting['down_long']['type'] == 'text') $message = $setting['down_long']['content'];
+	else if ($setting['down_long']['type'] == 'url') $message = read_content_from_url($setting['down_long']['content']); 
 }
 
 # Default display
 else { 
-	$message = $setting['default']['content'];
+	if ($setting['default']['type'] == 'text') $message = $setting['default']['content'];
+	else if ($setting['default']['type'] == 'url') $message = read_content_from_url($setting['default']['content']); 
 }
 
 # Do Not Disturb mode 
